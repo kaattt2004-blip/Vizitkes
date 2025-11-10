@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -8,235 +7,483 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="css/header-footer.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .accordion {
+            background: #f8f9fa;
+            color: #333;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: 0.4s;
+            position: relative;
+            padding-right: 60px;
+        }
+
+        .accordion:after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #777;
+            font-size: 1em;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+
+        .active:after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .active, .accordion:hover {
+            background: #e9ecef;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .footer-contacts {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-contacts h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .footer-contact-item i {
+            color: #3498db;
+        }
+
+        .copy-contact {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .copy-contact:hover .copy-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .copy-tooltip {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -70px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .copy-tooltip:after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .footer-contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-contact-item a:hover {
+            color: #3498db;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        /* Анимация затемнения только для контактов */
+        .footer-contacts.highlight {
+            animation: contact-highlight 1s ease;
+        }
+
+        @keyframes contact-highlight {
+            0% {
+                background-color: rgba(44, 62, 80, 0.9);
+            }
+            100% {
+                background-color: #2c3e50;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <div class="logo">
-            <a href="#">
-                <h1>ABC School</h1>
-                <p>Education for all</p>
-            </a>
+    <div class="logo">
+        <a href="#">
+            <h1>Сайт-визитка</h1>
+        </a>
+    </div>
+    <nav>
+        <div class="toggle-button">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
-        <nav>
-            <div class="toggle-button">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="close-button"></div>
-            <ul>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#About">About</a>
-                </li>
-                <li>
-                    <a href="#Academic">Academics</a>
-                </li>
-                <li>
-                    <a href="#Gallery">Gallery</a>
-                </li>
-                <li>
-                    <a href="#Contact">Contact</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+        <div class="close-button"></div>
+        <ul>
+            <li><a href="#About">О сайте</a></li>
+            <li><a href="#Members">Состав</a></li>
+            <li><a href="#Academic">Расписание</a></li>
+            <li><a href="#Gallery">Объявления</a></li>
+            <li><a href="#Contact">Контакты</a></li>
+        </ul>
+    </nav>
+	</header>
 
     <section id="#" class="hero">
-        <div class="slide-bg ">
+    <div class="slide-bg"></div>
+    <div class="hero-text-container">
+        <h1>Сайт-визитка</h1>
+        <p>Добро пожаловать на наш сайт</p>
+        <a class="btn" href="#About">Узнать больше..</a>
+    </div>
+	</section>
+
+	<hr>
+	<section id="About" class="about-section">
+    <h1>О сайте</h1>
+    <div class="flex-container" style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+        <div class="about-info" style="flex: 1; min-width: 300px;">
+            <h2>Описание</h2>
+            <p>Здесь собрана вся информация для студентов группы ИЦЭ-21: расписание, важные объявления и контакты ответственных. Цель — чтобы все было в одном месте и не терялось в чатах.</p>
         </div>
-        <div class="hero-text-container">
-            <h1>ABC School </h1>
-            <p>Education for all <span class="nepali-font"> - सबैका लागि शिक्षा</span></p>
-            <a class="btn" href="#About">Learn more..</a>
+        <div class="about-image" style="flex: 1; min-width: 300px; text-align: center;">
+            <img src="img/4.png" alt="О сайте" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         </div>
-    </section>
+    </div>
+	</section>
 
-    <section id="About" class="about-section">
-        <h1>About Our School</h1>
-        <div class="flex-container">
-            <div class="about-info">
-                <h2>Established Date</h2>
-                <p>ABC School, Lalitpur was established in January 1, 2023.
-                    Some short feature about this school will be written here.
-                </p>
-                <h2>Our Mission</h2>
-                <p> Our mission is to provide high-quality education to students of all ages and
-                    backgrounds. We believe that education is the key to unlocking a brighter future, and we are
-                    committed to helping our students achieve their full potential.It is an English medium
-                    school that trains student for good discipline, moral education, technical education and quality education.
-                </p>
-                <p>
-                    Our team of experienced educators and staff are dedicated to creating a welcoming and inclusive
-                    learning environment, where every student can thrive. Whether you're just starting your educational
-                    journey or looking to further your skills, we have a wide range of programs and courses to meet your
-                    needs.
-
-                    We believe that learning should be an engaging and enjoyable experience. That's
-                    why we use innovative teaching methods and technology to create dynamic and interactive classrooms.
-                    We are passionate about education, and we are excited to help you achieve your goals.
-
-                    Thank you for choosing ABC School. We look forward to helping you succeed!</p>
-
-                <p> Some more info is written here. Note this is just sample, any information wriiten here is not correct.
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap
-                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                    the
-                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing
-                    software like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
-
+    <button class="accordion" id="Members">Состав</button>
+    <div class="panel">
+        <div class="members" style="display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: flex-start !important; width: 100% !important; gap: 30px !important; flex-wrap: nowrap !important; padding: 20px !important;">
+            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
+                <img src="img/1.png" alt="Кузнецова Анна Сергеевна" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
+                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Староста</h3>
+                <p style="margin: 0 !important; font-size: 16px !important;">Кузнецова Анна Сергеевна</p>
             </div>
-            <div class="members">
-                <span class="span-text">Principal</span>
-                <div class="img-container">
-                    <img src="img/pcp.png" alt="Principal">
-                </div>
-                <div class="principal-info">
-                    <h2>John Doe</h2>
-                    <p>John Doe has been the principal of ABC Shikshya for over 10 years. He is passionate about
-                        education and is dedicated to providing a supportive and inclusive learning environment for all
-                        students. Under his leadership, ABC Shikshya has become one of the top educational
-                        institutions in the region.</p>
-                </div>
+            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
+                <img src="img/2.png" alt="Смирнов Дмитрий Ильич" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
+                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Ответственный за расписание</h3>
+                <p style="margin: 0 !important; font-size: 16px !important;">Смирнов Дмитрий Ильич</p>
+            </div>
+            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
+                <img src="img/3.png" alt="Петрова Полина Романовна" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
+                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Ответственный за объявления</h3>
+                <p style="margin: 0 !important; font-size: 16px !important;">Петрова Полина Романовна</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="Academic" class="academic-section">
-        <h2>Academics</h2>
-        <div class="education-levels">
-            <div class="education-level">
-                <h3>Pre-primary</h3>
-                <p>Age: 3-5 years, Nursery, LKG, UKG</p>
-                <p>Curriculum: Play-based learning</p>
-            </div>
-            <div class="education-level">
-                <h3>Primary</h3>
-                <p>Class 1 to Class 5</p>
-                <p>Curriculum: Reading, writing, math, science, english, nepali, social studies etc.</p>
-            </div>
-            <div class="education-level">
-                <h3>Lower Secondary</h3>
-                <p>Class 6 to Class 8</p>
-                <p>Curriculum: Science, math, social studies, english, nepali etc.</p>
-            </div>
-            <div class="education-level">
-                <h3>Secondary</h3>
-                <p>Class 9 & Class 10</p>
-                <p>Curriculum: Science, math, social studies, english, nepali and other optional subjects as directed by
-                    NEB.</p>
-            </div>
-            <div class="education-level">
-                <h3>Higher Secondary (+2 Level)</h3>
-                <p> Intermediate Level: Class 11 & 12</p>
-                <p>Curriculum: Science / Management / Arts</p>
-            </div>
+    <button class="accordion" id="Academic">Расписание</button>
+    <div class="panel">
+        <div class="excel-style-table" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; background: white; border: 1px solid #e1e1e1; border-radius: 2px; box-shadow: 0 0 10px rgba(0,0,0,0.05); overflow: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; min-width: 800px;">
+                <thead>
+                    <tr style="background: #217346; color: white;">
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Время/День</th>
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Понедельник</th>
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Вторник</th>
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Среда</th>
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Четверг</th>
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Пятница</th>
+                        <th style="padding: 12px 8px; border: 1px solid #1a5c38; text-align: center; font-weight: 600;">Суббота</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center; font-weight: 600; background: #f0f7ff;">9:00 - 10:30</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Математика (ауд. 101)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Физика (ауд. 203)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Информатика (лаб. 305)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Математика (ауд. 101)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Физкультура (зал)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center; background: #fff2cc;">-</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center; font-weight: 600; background: #f0f7ff;">10:40 - 12:10</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Информатика (лаб. 305)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Математика (ауд. 101)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Физика (ауд. 203)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Информатика (лаб. 305)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Математика (ауд. 101)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center; background: #fff2cc;">Консультации</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center; font-weight: 600; background: #f0f7ff;">12:20 - 13:50</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Физика (лаб. 210)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Информатика (лаб. 305)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Математика (ауд. 101)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Физика (лаб. 210)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center;">Информатика (лаб. 305)</td>
+                        <td style="padding: 10px 8px; border: 1px solid #e1e1e1; text-align: center; background: #fff2cc;">-</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </section>
-    <hr>
-    <section id="Gallery" class="gallery">
-        <h2>Gallery</h2>
-        <ul class="grid">
-            <li>
-                <figure class="grid__figure">
-                    <img src="https://picsum.photos/300/200/?random" alt="">
-                    <figcaption>image description title here..</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure class="grid__figure">
-                    <img src="https://picsum.photos/200/800/?random" alt="">
-                    <figcaption>image description title here..</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure class="grid__figure">
-                    <img src="https://picsum.photos/200/300/?random" alt="">
-                    <figcaption>image description title here..</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure class="grid__figure">
-                    <img src="https://picsum.photos/400/200/?random" alt="">
-                    <figcaption>image description title here..</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure class="grid__figure">
-                    <img src="https://picsum.photos/200/600/?random" alt="">
-                    <figcaption>image description title here...</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure class="grid__figure">
-                    <img src="https://picsum.photos/600/600/?random" alt="">
-                    <figcaption>image description title here..</figcaption>
-                </figure>
-            </li>
+        <div style="text-align: center; margin-top: 15px; padding-bottom: 20px;">
+            <a href="files/raspisanie.xlsx" style="color: #217346; text-decoration: none; font-weight: 600;" download>
+                <i class="fas fa-download"></i> Скачать расписание (Excel)
+            </a>
+        </div>
+    </div>
 
-        </ul>
-    </section>
-    <hr>
-    <section id="Contact" class="contact-section">
-        <h2>Contact Us</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <i class="fa fa-envelope"></i>
-                <a href="mailto:example@example.com">example@example.com</a>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <a href="tel:+1234567890">+1234567890</a>
-            </div>
-            <div class="contact-item">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <h3 style="margin: 20px; text-align: center;padding: 1%;">Location:</h3>
-        <div class="google-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.6988139510863!2d85.27122247534614!3d27.695702276189202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1878f7a2ba5d%3A0xdf5bda284dece113!2sKathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2sus!4v1681906070418!5m2!1sen!2sus" width="600" height="450"
-             style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>ABC School, Kathmandu</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#About">About us</a></li>
-                        <li><a href="#Contact">Contact</a></li>
-                        <li><a href="#Gallery">Gallery</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>follow us</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+    <button class="accordion" id="Gallery">Объявления</button>
+    <div class="panel">
+        <div class="announcements" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <div class="announcement-item" style="background: #f8f9fa; padding: 15px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid #217346;">
+                <h3 style="margin: 0 0 10px 0; color: #217346;">Важное собрание</h3>
+                <p style="margin: 0; color: #555;">Собрание для всех студентов группы ИЦЭ-21 состоится в пятницу в 14:00 в аудитории 301.</p>
+                <span style="font-size: 12px; color: #888;">Опубликовано: 20.11.2025</span>
             </div>
             
-            <div class="creator">
-                <span>Created by Darshan Bajgain | &copy; 2023 |</span>
+            <div class="announcement-item" style="background: #f8f9fa; padding: 15px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid #217346;">
+                <h3 style="margin: 0 0 10px 0; color: #217346;">Сдача лабораторных работ</h3>
+                <p style="margin: 0; color: #555;">Напоминаем о сроке сдачи лабораторных работ по информатике до 25 ноября.</p>
+                <span style="font-size: 12px; color: #888;">Опубликовано: 18.11.2025</span>
+            </div>
+            
+            <div class="announcement-item" style="background: #f8f9fa; padding: 15px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid #217346;">
+                <h3 style="margin: 0 0 10px 0; color: #217346;">Изменение в расписании</h3>
+                <p style="margin: 0; color: #555;">В среду, 22 ноября, занятия по физике переносятся с 10:40 на 12:20.</p>
+                <span style="font-size: 12px; color: #888;">Опубликовано: 15.11.2025</span>
             </div>
         </div>
+    </div>
+
+    <footer class="footer-contacts" id="Contact">
+        <h2>Контакты</h2>
+        <div class="footer-contact-info">
+            <div class="footer-contact-item">
+                <i class="fa fa-envelope fa-lg"></i>
+                <div class="copy-contact" onclick="copyEmail()">
+                    <span>example@example.com</span>
+                    <div class="copy-tooltip">Нажмите, чтобы скопировать</div>
+                </div>
+            </div>
+            <div class="footer-contact-item">
+                <i class="fas fa-phone fa-lg"></i>
+                <div class="copy-contact" onclick="copyPhoneNumber()">
+                    <span>+1234567890</span>
+                    <div class="copy-tooltip">Нажмите, чтобы скопировать</div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Сайт-визитка группы ИЦЭ-21. Все права защищены.
+        </div>
     </footer>
-    <script src="script/nav-menu.js"></script>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Аккордеон для блоков
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Функция для подсветки элемента
+        function highlightElement(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                // Добавляем класс подсветки
+                element.classList.add('highlight');
+                
+                // Удаляем класс подсветки через 1 секунду
+                setTimeout(() => {
+                    element.classList.remove('highlight');
+                }, 1000);
+            }
+        }
+
+        // Обработчик для навигационных ссылок (только для Контактов)
+        document.querySelectorAll('nav a[href="#Contact"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Подсвечиваем сразу после клика
+                setTimeout(() => {
+                    highlightElement('Contact');
+                }, 100); // Уменьшено с 800 до 100 мс
+            });
+        });
+
+        // Автоматическое открытие аккордеона при переходе по якорю
+        window.addEventListener('hashchange', function() {
+            var hash = window.location.hash.substring(1);
+            var targetElement = document.getElementById(hash);
+            
+            if (targetElement && targetElement.classList.contains('accordion')) {
+                // Если элемент - аккордеон, открываем его
+                var panel = targetElement.nextElementSibling;
+                if (!panel.style.maxHeight) {
+                    targetElement.classList.add("active");
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+                
+                // Прокручиваем к элементу
+                setTimeout(function() {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else if (targetElement && hash === 'Contact') {
+                // Для контактов прокручиваем и подсвечиваем
+                setTimeout(function() {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Подсвечиваем элемент сразу после прокрутки
+                    setTimeout(() => {
+                        highlightElement('Contact');
+                    }, 100); // Уменьшено с 500 до 100 мс
+                }, 100);
+            }
+        });
+
+        // При загрузке страницы проверяем хеш и открываем соответствующий аккордеон
+        window.addEventListener('load', function() {
+            var hash = window.location.hash.substring(1);
+            if (hash) {
+                var targetElement = document.getElementById(hash);
+                if (targetElement && targetElement.classList.contains('accordion')) {
+                    var panel = targetElement.nextElementSibling;
+                    targetElement.classList.add("active");
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } else if (targetElement && hash === 'Contact') {
+                    // Подсвечиваем контакты
+                    setTimeout(() => {
+                        highlightElement('Contact');
+                    }, 500); // Оставляем 500 мс для начальной загрузки
+                }
+            }
+        });
+
+        // Функция для показа уведомления
+        function showToast(message) {
+            var toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(function() {
+                toast.classList.remove("show");
+            }, 2000);
+        }
+
+        // Функция для копирования номера телефона
+        function copyPhoneNumber() {
+            const phoneNumber = "+1234567890";
+            navigator.clipboard.writeText(phoneNumber).then(function() {
+                showToast("Номер телефона скопирован");
+            }, function(err) {
+                // Fallback для старых браузеров
+                const textArea = document.createElement("textarea");
+                textArea.value = phoneNumber;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast("Номер телефона скопирован");
+            });
+        }
+
+        // Функция для копирования email
+        function copyEmail() {
+            const email = "example@example.com";
+            navigator.clipboard.writeText(email).then(function() {
+                showToast("Email скопирован");
+            }, function(err) {
+                // Fallback для старых браузеров
+                const textArea = document.createElement("textarea");
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast("Email скопирован");
+            });
+        }
+    </script>
+   
 </body>
 
 </html>
