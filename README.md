@@ -1,12 +1,16 @@
-## StaticSinglePageSchoolWebsite with Responsive Mobile Navmenu bar made with HTML, CSS, AND JAVASCRIPT
-Simple static single-page school website, fully responsive, with toggle menu for mobile view, Made using HTML, CSS, and JavaScript
+# Vizitkes
 
-## Features:
-#Fully responsive design
-#Toggle menu for mobile view
+Современное решение для цифровых визиток с адаптивным дизайном и интерактивными элементами. Создано с использованием HTML, CSS и JavaScript.
 
-### LIVE-PREVIEW: https://sampleschoolsite-sp-mobilenav.netlify.app/
-## Language used: 
-#HTML
-#CSS
-#JAVASCRIPT
+## Функциональность:
+- Адаптивный интерфейс
+- Удобное меню для мобильных устройств
+- Современный дизайн
+- Быстрая загрузка
+
+## Демо: ССылка
+
+## Технологии:
+# HTML5
+# CSS3 (Flexbox/Grid)
+# Vanilla JavaScript
