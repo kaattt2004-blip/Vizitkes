@@ -8,7 +8,7 @@
 - Современный дизайн
 - Быстрая загрузка
 
-## Демо-версия: https://vermillion-granita-e92c12.netlify.app/
+## Демо-версия: https://magenta-monstera-203e5d.netlify.app/
 
 ## Технологии:
 - HTML
