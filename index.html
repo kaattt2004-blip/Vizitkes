@@ -178,6 +178,124 @@
                 background-color: #2c3e50;
             }
         }
+
+        /* Мобильное меню */
+        .toggle-button {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .close-button {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+            color: white;
+        }
+
+        /* Стили для мобильной версии */
+        @media (max-width: 768px) {
+            .toggle-button {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: #2c3e50;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.3s;
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            .close-button {
+                display: block;
+            }
+
+            /* Адаптация блока "О сайте" */
+            .about-section .flex-container {
+                flex-direction: column;
+            }
+
+            .about-info, .about-image {
+                min-width: 100% !important;
+                text-align: center;
+            }
+
+            /* Адаптация блока "Состав" */
+            .members {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 20px !important;
+            }
+
+            .member {
+                min-width: 100% !important;
+                margin-bottom: 20px;
+            }
+
+            /* Адаптация таблицы расписания */
+            .excel-style-table {
+                padding: 10px !important;
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 12px !important;
+            }
+
+            th, td {
+                padding: 8px 4px !important;
+            }
+
+            /* Адаптация аккордеона */
+            .accordion {
+                font-size: 1.2em !important;
+                padding: 15px !important;
+            }
+
+            /* Адаптация футера */
+            .footer-contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text-container h1 {
+                font-size: 1.8em;
+            }
+            
+            .hero-text-container p {
+                font-size: 1em;
+            }
+            
+            .accordion {
+                font-size: 1.1em !important;
+            }
+        }
     </style>
 </head>
 
@@ -194,12 +312,12 @@
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
-        <div class="close-button"></div>
+        <div class="close-button">×</div>
         <ul>
             <li><a href="#About">О сайте</a></li>
-            <li><a href="#Members">Состав</a></li>
             <li><a href="#Academic">Расписание</a></li>
             <li><a href="#Gallery">Объявления</a></li>
+            <li><a href="#Members">Состав</a></li>
             <li><a href="#Contact">Контакты</a></li>
         </ul>
     </nav>
@@ -227,27 +345,6 @@
         </div>
     </div>
 	</section>
-
-    <button class="accordion" id="Members">Состав</button>
-    <div class="panel">
-        <div class="members" style="display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: flex-start !important; width: 100% !important; gap: 30px !important; flex-wrap: nowrap !important; padding: 20px !important;">
-            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
-                <img src="img/1.png" alt="Кузнецова Анна Сергеевна" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
-                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Староста</h3>
-                <p style="margin: 0 !important; font-size: 16px !important;">Кузнецова Анна Сергеевна</p>
-            </div>
-            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
-                <img src="img/2.png" alt="Смирнов Дмитрий Ильич" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
-                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Ответственный за расписание</h3>
-                <p style="margin: 0 !important; font-size: 16px !important;">Смирнов Дмитрий Ильич</p>
-            </div>
-            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
-                <img src="img/3.png" alt="Петрова Полина Романовна" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
-                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Ответственный за объявления</h3>
-                <p style="margin: 0 !important; font-size: 16px !important;">Петрова Полина Романовна</p>
-            </div>
-        </div>
-    </div>
 
     <button class="accordion" id="Academic">Расписание</button>
     <div class="panel">
@@ -325,20 +422,41 @@
         </div>
     </div>
 
+    <button class="accordion" id="Members">Состав</button>
+    <div class="panel">
+        <div class="members" style="display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: flex-start !important; width: 100% !important; gap: 30px !important; flex-wrap: nowrap !important; padding: 20px !important;">
+            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
+                <img src="img/1.png" alt="Кузнецова Анна Сергеевна" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
+                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Староста</h3>
+                <p style="margin: 0 !important; font-size: 16px !important;">Кузнецова Анна Сергеевна</p>
+            </div>
+            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
+                <img src="img/2.png" alt="Смирнов Дмитрий Ильич" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
+                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Ответственный за расписание</h3>
+                <p style="margin: 0 !important; font-size: 16px !important;">Смирнов Дмитрий Ильич</p>
+            </div>
+            <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
+                <img src="img/3.png" alt="Петрова Полина Романовна" style="width: 100% !important; max-width: 220px !important; border-radius: 8px !important; object-fit: cover !important; margin: 0 auto 15px !important;">
+                <h3 style="margin: 10px 0 5px !important; font-size: 18px !important;">Ответственный за объявления</h3>
+                <p style="margin: 0 !important; font-size: 16px !important;">Петрова Полина Романовна</p>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer-contacts" id="Contact">
         <h2>Контакты</h2>
         <div class="footer-contact-info">
             <div class="footer-contact-item">
                 <i class="fa fa-envelope fa-lg"></i>
                 <div class="copy-contact" onclick="copyEmail()">
-                    <span>example@example.com</span>
+                    <span>ice-21-group@university.edu</span>
                     <div class="copy-tooltip">Нажмите, чтобы скопировать</div>
                 </div>
             </div>
             <div class="footer-contact-item">
                 <i class="fas fa-phone fa-lg"></i>
                 <div class="copy-contact" onclick="copyPhoneNumber()">
-                    <span>+1234567890</span>
+                    <span>+7 (495) 123-45-67</span>
                     <div class="copy-tooltip">Нажмите, чтобы скопировать</div>
                 </div>
             </div>
@@ -351,6 +469,26 @@
     <div id="toast" class="toast"></div>
 
     <script>
+        // Мобильное меню
+        const toggleButton = document.querySelector('.toggle-button');
+        const closeButton = document.querySelector('.close-button');
+        const navMenu = document.querySelector('nav ul');
+        
+        toggleButton.addEventListener('click', () => {
+            navMenu.classList.add('active');
+        });
+        
+        closeButton.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
         // Аккордеон для блоков
         var acc = document.getElementsByClassName("accordion");
         var i;
@@ -387,7 +525,7 @@
                 // Подсвечиваем сразу после клика
                 setTimeout(() => {
                     highlightElement('Contact');
-                }, 100); // Уменьшено с 800 до 100 мс
+                }, 100);
             });
         });
 
@@ -416,7 +554,7 @@
                     // Подсвечиваем элемент сразу после прокрутки
                     setTimeout(() => {
                         highlightElement('Contact');
-                    }, 100); // Уменьшено с 500 до 100 мс
+                    }, 100);
                 }, 100);
             }
         });
@@ -434,7 +572,7 @@
                     // Подсвечиваем контакты
                     setTimeout(() => {
                         highlightElement('Contact');
-                    }, 500); // Оставляем 500 мс для начальной загрузки
+                    }, 500);
                 }
             }
         });
@@ -451,7 +589,7 @@
 
         // Функция для копирования номера телефона
         function copyPhoneNumber() {
-            const phoneNumber = "+1234567890";
+            const phoneNumber = "+7 (495) 123-45-67";
             navigator.clipboard.writeText(phoneNumber).then(function() {
                 showToast("Номер телефона скопирован");
             }, function(err) {
@@ -468,7 +606,7 @@
 
         // Функция для копирования email
         function copyEmail() {
-            const email = "example@example.com";
+            const email = "ice-21-group@university.edu";
             navigator.clipboard.writeText(email).then(function() {
                 showToast("Email скопирован");
             }, function(err) {
