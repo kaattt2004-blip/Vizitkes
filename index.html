@@ -208,32 +208,36 @@
             color: white;
         }
 
-        /* Стили для мобильной версии */
+          /* Стили для мобильной версии */
         @media (max-width: 768px) {
-            .toggle-button {
-                display: flex;
+
+            /* Бургер и крестик вообще не используем */
+            .toggle-button,
+            .close-button {
+                display: none !important;
             }
 
+            /* Простое меню: ссылки видны всегда, под шапкой */
             nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: #2c3e50;
-                flex-direction: column;
+                position: static;
+                width: 100%;
+                height: auto;
+                background: transparent;
+                display: flex;
+                flex-wrap: wrap;
                 justify-content: center;
                 align-items: center;
-                transition: 0.3s;
-                z-index: 1000;
+                gap: 10px;
+                padding: 10px 0;
             }
 
-            nav ul.active {
-                right: 0;
+            nav ul li {
+                list-style: none;
             }
 
-            .close-button {
+            nav ul li a {
                 display: block;
+                padding: 6px 10px;
             }
 
             /* Адаптация блока "О сайте" */
