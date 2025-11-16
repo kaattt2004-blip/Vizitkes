@@ -606,27 +606,35 @@
     <div id="toast" class="toast"></div>
 
     <script>
-        // Мобильное меню
+        // --- Мобильное меню (бургер) ---
         const toggleButton = document.querySelector('.toggle-button');
         const closeButton = document.querySelector('.close-button');
         const navMenu = document.querySelector('nav ul');
-        
-        toggleButton.addEventListener('click', () => {
-            navMenu.classList.add('active');
-        });
-        
-        closeButton.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-        });
-        
-        // Закрытие меню при клике на ссылку
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
+
+        // Открыть меню по клику на бургер
+        if (toggleButton && navMenu) {
+            toggleButton.addEventListener('click', () => {
+                navMenu.classList.add('active');
+            });
+        }
+
+        // Закрыть меню по крестику
+        if (closeButton && navMenu) {
+            closeButton.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
-        });
+        }
 
-        // Аккордеон для блоков
+        // Закрыть меню по клику на любую ссылку
+        if (navMenu) {
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // --- Аккордеон для блоков ---
         var acc = document.getElementsByClassName("accordion");
         var i;
 
@@ -638,28 +646,24 @@
                     panel.style.maxHeight = null;
                 } else {
                     panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
+                }
             });
         }
 
-        // Функция для подсветки элемента
+        // --- Подсветка блока контактов ---
         function highlightElement(elementId) {
             const element = document.getElementById(elementId);
             if (element) {
-                // Добавляем класс подсветки
                 element.classList.add('highlight');
-                
-                // Удаляем класс подсветки через 1 секунду
                 setTimeout(() => {
                     element.classList.remove('highlight');
                 }, 1000);
             }
         }
 
-        // Обработчик для навигационных ссылок (только для Контактов)
+        // Подсветка контактов при клике в меню
         document.querySelectorAll('nav a[href="#Contact"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Подсвечиваем сразу после клика
+            link.addEventListener('click', function() {
                 setTimeout(() => {
                     highlightElement('Contact');
                 }, 100);
@@ -672,23 +676,17 @@
             var targetElement = document.getElementById(hash);
             
             if (targetElement && targetElement.classList.contains('accordion')) {
-                // Если элемент - аккордеон, открываем его
                 var panel = targetElement.nextElementSibling;
                 if (!panel.style.maxHeight) {
                     targetElement.classList.add("active");
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 }
-                
-                // Прокручиваем к элементу
                 setTimeout(function() {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             } else if (targetElement && hash === 'Contact') {
-                // Для контактов прокручиваем и подсвечиваем
                 setTimeout(function() {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Подсвечиваем элемент сразу после прокрутки
                     setTimeout(() => {
                         highlightElement('Contact');
                     }, 100);
@@ -706,7 +704,6 @@
                     targetElement.classList.add("active");
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 } else if (targetElement && hash === 'Contact') {
-                    // Подсвечиваем контакты
                     setTimeout(() => {
                         highlightElement('Contact');
                     }, 500);
@@ -714,7 +711,7 @@
             }
         });
 
-        // Функция для показа уведомления
+        // --- Toast-уведомления и копирование контактов ---
         function showToast(message) {
             var toast = document.getElementById("toast");
             toast.textContent = message;
@@ -724,13 +721,11 @@
             }, 2000);
         }
 
-        // Функция для копирования номера телефона
         function copyPhoneNumber() {
             const phoneNumber = "+7 (495) 123-45-67";
             navigator.clipboard.writeText(phoneNumber).then(function() {
                 showToast("Номер телефона скопирован");
-            }, function(err) {
-                // Fallback для старых браузеров
+            }, function() {
                 const textArea = document.createElement("textarea");
                 textArea.value = phoneNumber;
                 document.body.appendChild(textArea);
@@ -741,22 +736,22 @@
             });
         }
 
-        // Функция для копирования email
-function copyPersonEmail(email){
-  if (navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(email).then(function(){
-      showToast("Email скопирован");
-    });
-  } else {
-    const ta=document.createElement("textarea");
-    ta.value=email; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    showToast("Email скопирован");
-  }
-}
-
+        function copyEmail() {
+            const email = "ice-21-group@university.edu";
+            navigator.clipboard.writeText(email).then(function() {
+                showToast("Email скопирован");
+            }, function() {
+                const textArea = document.createElement("textarea");
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast("Email скопирован");
+            });
+        }
     </script>
-   
+
 </body>
 
 </html>
