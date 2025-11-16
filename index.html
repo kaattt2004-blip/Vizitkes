@@ -210,85 +210,31 @@
 
         /* Стили для мобильной версии */
         @media (max-width: 768px) {
+            .toggle-button {
+                display: flex;
+            }
 
-            /* Делаем шапку "контейнером" для выпадающего меню */
-            header {
-                position: sticky;
+            nav ul {
+                position: fixed;
                 top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: #2c3e50;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.3s;
                 z-index: 1000;
             }
 
-            header nav {
-                position: relative;
-            }
-
-            /* Бургер справа */
-            header nav .toggle-button {
-                display: flex !important;
-                flex-direction: column;
-                justify-content: space-between;
-                width: 26px;
-                height: 18px;
-                padding: 0;
-                margin-left: auto;
-                background: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
-                cursor: pointer;
-            }
-
-            header nav .toggle-button .bar {
-                width: 100%;
-                height: 3px;
-                background-color: #ffffff;
-                border-radius: 2px;
-            }
-
-            /* Крестик не используем – прячем */
-            header nav .close-button {
-                display: none !important;
-            }
-
-            /* Выпадающее меню под шапкой */
-            header nav ul {
-                position: absolute !important;
-                top: 100%;
+            nav ul.active {
                 right: 0;
-                left: auto;
-                width: 220px;
-                max-width: 80vw;
-                margin: 6px 0 0;
-                padding: 8px 0;
-                list-style: none;
-                display: none !important;         /* скрыто по умолчанию */
-                flex-direction: column;
-                align-items: flex-start;
-                background-color: #2c3e50;
-                border-radius: 8px;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-                z-index: 999;
             }
 
-            /* Когда добавляем класс .active — показываем меню */
-            header nav ul.active {
-                display: flex !important;
-            }
-
-            header nav ul li {
-                width: 100%;
-            }
-
-            header nav ul li a {
+            .close-button {
                 display: block;
-                width: 100%;
-                padding: 10px 16px;
-                color: #ffffff;
             }
-
-            header nav ul li a:hover {
-                background-color: rgba(255,255,255,0.1);
-            }
-        }
 
             /* Адаптация блока "О сайте" */
             .about-section .flex-container {
@@ -336,78 +282,6 @@
             .footer-contact-info {
                 flex-direction: column;
                 gap: 20px;
-            }
-        }
-
-            /* сам бургер */
-            header nav .toggle-button {
-                display: flex !important;
-                flex-direction: column;
-                justify-content: center;
-                gap: 4px;
-                width: 32px;
-                height: 32px;
-                padding: 4px;
-                border-radius: 4px;
-                background: transparent !important;
-                border: none !important;
-            }
-
-            header nav .bar {
-                width: 100%;
-                height: 3px;
-                background-color: #fff;
-                border-radius: 2px;
-            }
-
-            /* крестик прячем, он нам не нужен */
-            header nav .close-button {
-                display: none !important;
-            }
-
-            /* Выпадающее мобильное меню */
-            header nav ul {
-                position: absolute;
-                top: 100%;
-                right: 0;
-                left: auto;
-                width: 220px;
-                max-width: 80vw;
-                background: #2c3e50;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                margin: 8px 0 0;
-                padding: 8px 0;
-                list-style: none;
-                border-radius: 8px;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-                opacity: 0;
-                pointer-events: none;
-                transform: translateY(5px);
-                transition: opacity 0.25s ease, transform 0.25s ease;
-                z-index: 999;
-            }
-
-            header nav ul.active {
-                opacity: 1;
-                pointer-events: auto;
-                transform: translateY(0);
-            }
-
-            header nav ul li {
-                width: 100%;
-            }
-
-            header nav ul li a {
-                display: block;
-                width: 100%;
-                padding: 10px 16px;
-                color: #fff;
-            }
-
-            header nav ul li a:hover {
-                background: rgba(255,255,255,0.1);
             }
         }
 
@@ -655,8 +529,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Преподаватель математики</h3>
       <p style="margin: 0; font-size: 16px;">Иванов Сергей Петрович</p>
-      <div class="email-copy" onclick="copyPersonEmail('sergey.ivanov@university.test')">
-        <i class="fa-regular fa-copy"></i><span>sergey.ivanov@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('sergey.ivanov@college.test')">
+        <i class="fa-regular fa-copy"></i><span>sergey.ivanov@college.test</span>
       </div>
     </div>
 
@@ -665,8 +539,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Преподаватель информатики</h3>
       <p style="margin: 0; font-size: 16px;">Алексеева Мария Викторовна</p>
-      <div class="email-copy" onclick="copyPersonEmail('maria.alekseeva@university.test')">
-        <i class="fa-regular fa-copy"></i><span>maria.alekseeva@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('maria.alekseeva@college.test')">
+        <i class="fa-regular fa-copy"></i><span>maria.alekseeva@college.test</span>
       </div>
     </div>
 
@@ -675,8 +549,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Преподаватель физики</h3>
       <p style="margin: 0; font-size: 16px;">Орлов Андрей Николаевич</p>
-      <div class="email-copy" onclick="copyPersonEmail('andrey.orlov@university.test')">
-        <i class="fa-regular fa-copy"></i><span>andrey.orlov@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('andrey.orlov@college.test')">
+        <i class="fa-regular fa-copy"></i><span>andrey.orlov@college.test</span>
       </div>
     </div>
 
@@ -685,8 +559,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Преподаватель экономики</h3>
       <p style="margin: 0; font-size: 16px;">Новикова Елена Алексеевна</p>
-      <div class="email-copy" onclick="copyPersonEmail('elena.novikova@university.test')">
-        <i class="fa-regular fa-copy"></i><span>elena.novikova@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('elena.novikova@college.test')">
+        <i class="fa-regular fa-copy"></i><span>elena.novikova@college.test</span>
       </div>
     </div>
 
@@ -695,8 +569,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Преподаватель английского языка</h3>
       <p style="margin: 0; font-size: 16px;">Смирнова Ольга Игоревна</p>
-      <div class="email-copy" onclick="copyPersonEmail('olga.smirnova@university.test')">
-        <i class="fa-regular fa-copy"></i><span>olga.smirnova@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('olga.smirnova@college.test')">
+        <i class="fa-regular fa-copy"></i><span>olga.smirnova@college.test</span>
       </div>
     </div>
 
@@ -705,8 +579,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Куратор группы</h3>
       <p style="margin: 0; font-size: 16px;">Петров Дмитрий Валерьевич</p>
-      <div class="email-copy" onclick="copyPersonEmail('dmitry.petrov@university.test')">
-        <i class="fa-regular fa-copy"></i><span>dmitry.petrov@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('dmitry.petrov@college.test')">
+        <i class="fa-regular fa-copy"></i><span>dmitry.petrov@college.test</span>
       </div>
     </div>
 
@@ -715,8 +589,8 @@
            style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin: 0 auto 15px;">
       <h3 style="margin: 10px 0 5px; font-size: 18px; min-height: 48px;">Заведующая кафедрой</h3>
       <p style="margin: 0; font-size: 16px;">Кузнецова Татьяна Владимировна</p>
-      <div class="email-copy" onclick="copyPersonEmail('tatyana.kuznetsova@university.test')">
-        <i class="fa-regular fa-copy"></i><span>tatyana.kuznetsova@university.test</span>
+      <div class="email-copy" onclick="copyPersonEmail('tatyana.kuznetsova@college.test')">
+        <i class="fa-regular fa-copy"></i><span>tatyana.kuznetsova@college.test</span>
       </div>
     </div>
 
@@ -732,35 +606,27 @@
     <div id="toast" class="toast"></div>
 
     <script>
-        // --- Мобильное меню (бургер) ---
+        // Мобильное меню
         const toggleButton = document.querySelector('.toggle-button');
         const closeButton = document.querySelector('.close-button');
         const navMenu = document.querySelector('nav ul');
-
-        // Открыть меню по клику на бургер
-        if (toggleButton && navMenu) {
-            toggleButton.addEventListener('click', () => {
-                navMenu.classList.add('active');
-            });
-        }
-
-        // Закрыть меню по крестику
-        if (closeButton && navMenu) {
-            closeButton.addEventListener('click', () => {
+        
+        toggleButton.addEventListener('click', () => {
+            navMenu.classList.add('active');
+        });
+        
+        closeButton.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
-        }
+        });
 
-        // Закрыть меню по клику на любую ссылку
-        if (navMenu) {
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                });
-            });
-        }
-
-        // --- Аккордеон для блоков ---
+        // Аккордеон для блоков
         var acc = document.getElementsByClassName("accordion");
         var i;
 
@@ -772,24 +638,28 @@
                     panel.style.maxHeight = null;
                 } else {
                     panel.style.maxHeight = panel.scrollHeight + "px";
-                }
+                } 
             });
         }
 
-        // --- Подсветка блока контактов ---
+        // Функция для подсветки элемента
         function highlightElement(elementId) {
             const element = document.getElementById(elementId);
             if (element) {
+                // Добавляем класс подсветки
                 element.classList.add('highlight');
+                
+                // Удаляем класс подсветки через 1 секунду
                 setTimeout(() => {
                     element.classList.remove('highlight');
                 }, 1000);
             }
         }
 
-        // Подсветка контактов при клике в меню
+        // Обработчик для навигационных ссылок (только для Контактов)
         document.querySelectorAll('nav a[href="#Contact"]').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
+                // Подсвечиваем сразу после клика
                 setTimeout(() => {
                     highlightElement('Contact');
                 }, 100);
@@ -802,17 +672,23 @@
             var targetElement = document.getElementById(hash);
             
             if (targetElement && targetElement.classList.contains('accordion')) {
+                // Если элемент - аккордеон, открываем его
                 var panel = targetElement.nextElementSibling;
                 if (!panel.style.maxHeight) {
                     targetElement.classList.add("active");
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 }
+                
+                // Прокручиваем к элементу
                 setTimeout(function() {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             } else if (targetElement && hash === 'Contact') {
+                // Для контактов прокручиваем и подсвечиваем
                 setTimeout(function() {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Подсвечиваем элемент сразу после прокрутки
                     setTimeout(() => {
                         highlightElement('Contact');
                     }, 100);
@@ -830,6 +706,7 @@
                     targetElement.classList.add("active");
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 } else if (targetElement && hash === 'Contact') {
+                    // Подсвечиваем контакты
                     setTimeout(() => {
                         highlightElement('Contact');
                     }, 500);
@@ -837,7 +714,7 @@
             }
         });
 
-        // --- Toast-уведомления и копирование контактов ---
+        // Функция для показа уведомления
         function showToast(message) {
             var toast = document.getElementById("toast");
             toast.textContent = message;
@@ -847,11 +724,13 @@
             }, 2000);
         }
 
+        // Функция для копирования номера телефона
         function copyPhoneNumber() {
             const phoneNumber = "+7 (495) 123-45-67";
             navigator.clipboard.writeText(phoneNumber).then(function() {
                 showToast("Номер телефона скопирован");
-            }, function() {
+            }, function(err) {
+                // Fallback для старых браузеров
                 const textArea = document.createElement("textarea");
                 textArea.value = phoneNumber;
                 document.body.appendChild(textArea);
@@ -862,22 +741,22 @@
             });
         }
 
-        function copyEmail() {
-            const email = "ice-21-group@university.edu";
-            navigator.clipboard.writeText(email).then(function() {
-                showToast("Email скопирован");
-            }, function() {
-                const textArea = document.createElement("textarea");
-                textArea.value = email;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showToast("Email скопирован");
-            });
-        }
-    </script>
+        // Функция для копирования email
+function copyPersonEmail(email){
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(email).then(function(){
+      showToast("Email скопирован");
+    });
+  } else {
+    const ta=document.createElement("textarea");
+    ta.value=email; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    showToast("Email скопирован");
+  }
+}
 
+    </script>
+   
 </body>
 
 </html>
