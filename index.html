@@ -246,18 +246,17 @@
                 text-align: center;
             }
 
-            /* Адаптация блока "Состав группы" (только этот аккордеон) */
-            #Members + .panel .members {
+            /* Адаптация блока "Состав" */
+            .members {
                 flex-direction: column !important;
                 align-items: center !important;
                 gap: 20px !important;
             }
 
-            #Members + .panel .member {
+            .member {
                 min-width: 100% !important;
                 margin-bottom: 20px;
             }
-
 
             /* Адаптация таблицы расписания */
             .excel-style-table {
@@ -487,7 +486,7 @@
 
 <button class="accordion" id="Members">Состав группы</button>
 <div class="panel">
-  <div class="members" style="display: flex !important; justify-content: space-between !important; align-items: flex-start !important; width: 100% !important; gap: 30px !important; flex-wrap: nowrap !important; padding: 20px !important;">
+  <div class="members" style="display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: flex-start !important; width: 100% !important; gap: 30px !important; flex-wrap: nowrap !important; padding: 20px !important;">
     <div class="member" style="flex: 1 !important; text-align: center !important; min-width: 250px !important;">
       <img src="img/1.png" alt="Кузнецова Анна Сергеевна"
            style="width: 100% !important; max-width: 220px !important; aspect-ratio: 1 / 1; border-radius: 50% !important; object-fit: cover !important; margin: 0 auto 15px !important;">
@@ -611,27 +610,35 @@
         const toggleButton = document.querySelector('.toggle-button');
         const closeButton = document.querySelector('.close-button');
         const navMenu = document.querySelector('nav ul');
-
-        // Открыть меню по клику на бургер
-        if (toggleButton && navMenu) {
-            toggleButton.addEventListener('click', function () {
-                navMenu.classList.add('active');
-            });
-        }
-
-        // Закрыть меню по крестику
-        if (closeButton && navMenu) {
-            closeButton.addEventListener('click', function () {
+        
+        toggleButton.addEventListener('click', () => {
+            navMenu.classList.add('active');
+        });
+        
+        closeButton.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
-        }
+        });
 
-        // Закрывать меню при клике по любому пункту
-        if (navMenu) {
-            document.querySelectorAll('nav a').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    navMenu.classList.remove('active');
-                });
+        // Аккордеон для блоков
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
             });
         }
 
