@@ -285,6 +285,101 @@
             }
         }
 
+        /* Переписываем мобильный хедер и бургер, чтобы он работал нормально */
+        @media (max-width: 768px) {
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 16px;
+                background: #2c3e50;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            header .logo h1,
+            header .logo a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            header nav {
+                position: relative;
+            }
+
+            /* сам бургер */
+            header nav .toggle-button {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center;
+                gap: 4px;
+                width: 32px;
+                height: 32px;
+                padding: 4px;
+                border-radius: 4px;
+                background: transparent !important;
+                border: none !important;
+            }
+
+            header nav .bar {
+                width: 100%;
+                height: 3px;
+                background-color: #fff;
+                border-radius: 2px;
+            }
+
+            /* крестик прячем, он нам не нужен */
+            header nav .close-button {
+                display: none !important;
+            }
+
+            /* Выпадающее мобильное меню */
+            header nav ul {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: auto;
+                width: 220px;
+                max-width: 80vw;
+                background: #2c3e50;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                margin: 8px 0 0;
+                padding: 8px 0;
+                list-style: none;
+                border-radius: 8px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(5px);
+                transition: opacity 0.25s ease, transform 0.25s ease;
+                z-index: 999;
+            }
+
+            header nav ul.active {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            header nav ul li {
+                width: 100%;
+            }
+
+            header nav ul li a {
+                display: block;
+                width: 100%;
+                padding: 10px 16px;
+                color: #fff;
+            }
+
+            header nav ul li a:hover {
+                background: rgba(255,255,255,0.1);
+            }
+        }
+
         @media (max-width: 480px) {
             .hero-text-container h1 {
                 font-size: 1.8em;
