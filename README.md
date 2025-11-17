@@ -8,7 +8,7 @@
 - Современный дизайн
 - Быстрая загрузка
 
-## Демо-версия: https://magenta-monstera-203e5d.netlify.app/
+## Демо-версия: https://kaattt2004-blip.github.io/Vizitkes/
 
 ## Технологии:
 - HTML
