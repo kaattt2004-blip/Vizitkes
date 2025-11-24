@@ -1,34 +1,45 @@
-const toggleButton = document.querySelector('.toggle-button');
-const closeButton = document.querySelector('.close-button');
-const mobileNav = document.querySelector('nav ul');
-const navItem = document.querySelectorAll('li a');
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.querySelector(".toggle-button");
+  const closeButton = document.querySelector(".close-button");
+  const mobileNav = document.querySelector("nav ul");
+  const navItems = document.querySelectorAll("nav ul li a");
+  const breakpoint = 876;
 
-const Display = () => {
-    mobileNav.style.display = 'block';
-    closeButton.style.display = 'block';
-};
+  if (!toggleButton || !closeButton || !mobileNav) {
+    return;
+  }
 
-const Close = () => {
-    mobileNav.style.display = 'none';
-    closeButton.style.display = 'none';
-}
+  const openMenu = () => {
+    mobileNav.style.display = "block";
+    closeButton.style.display = "block";
+  };
 
-// When pressed toggle button then mobile navmenu should appear
-toggleButton.addEventListener('click', () => {
-    Display();
-});
+  const closeMenu = () => {
+    mobileNav.style.display = "none";
+    closeButton.style.display = "none";
+  };
 
-// When pressed clicked on close button, the mobile navmenu should disappear
+  const syncByViewport = () => {
+    if (window.innerWidth >= breakpoint) {
+      mobileNav.style.display = "flex";
+      closeButton.style.display = "none";
+    } else {
+      mobileNav.style.display = "none";
+      closeButton.style.display = "none";
+    }
+  };
 
-closeButton.addEventListener('click', () => {
-    Close();
-});
+  toggleButton.addEventListener("click", openMenu);
+  closeButton.addEventListener("click", closeMenu);
 
-// When clicked on navitems the mobile navmenu should close;
-// Attach click event listeners to each nav item
-navItem.forEach(navItem => {
-    navItem.addEventListener('click', () => {
-        if (window.innerWidth < 876) // Adjust the breakpoint as needed
-            Close();
+  navItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      if (window.innerWidth < breakpoint) {
+        closeMenu();
+      }
     });
+  });
+
+  window.addEventListener("resize", syncByViewport);
+  syncByViewport();
 });
